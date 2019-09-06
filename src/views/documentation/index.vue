@@ -1,134 +1,63 @@
 <template>
-  <div>
-<!--第一步 定义显示内容-->
-    <el-table
-      :data="tableData"
-      border
-      style="width: 100%"
-    >
-      <el-table-column
-        fixed
-        prop="date"
-        label="日期"
-        width="150"
-      />
-      <el-table-column
-        prop="name"
-        label="姓名"
-        width="120"
-      />
-      <el-table-column
-        prop="province"
-        label="省份"
-        width="120"
-      />
-      <el-table-column
-        prop="city"
-        label="市区"
-        width="120"
-      />
-      <el-table-column
-        prop="address"
-        label="地址"
-        width="300"
-      />
-      <el-table-column
-        prop="zip"
-        label="邮编"
-        width="120"
-      />
-      <el-table-column
-        fixed="right"
-        label="操作"
-        width="100"
-      >
-        <template slot-scope="scope">
-          <el-button type="text" size="small" @click="dialogOpen(scope.row)">编辑</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-    <el-dialog title="更改" :visible.sync="dialogFormVisible">
-      <el-form ref="formVisible" :model="form" class="custom-form">
-        <el-form-item label="姓名" :label-width="formLabelWidth">
-          <el-input v-model="form.name" auto-complete="off" />
-        </el-form-item>
-        <el-form-item label="姓名" :label-width="formLabelWidth">
-          <el-select v-model="form.region" placeholder="请选择活动区域">
-            <el-option label="区域一" value="shanghai" />
-            <el-option label="区域二" value="beijing" />
-          </el-select>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogClose()">取 消</el-button>
-        <el-button type="primary" @click="confirm()">确 定</el-button>
-      </div>
-    </el-dialog>
+  <div class="app-container documentation-container">
+    <a
+      class="document-btn"
+      target="_blank"
+      href="https://panjiachen.github.io/vue-element-admin-site/"
+    >Documentation</a>
+    <a
+      class="document-btn"
+      target="_blank"
+      href="https://github.com/PanJiaChen/vue-element-admin/"
+    >Github Repository</a>
+    <a
+      class="document-btn"
+      target="_blank"
+      href="https://panjiachen.gitee.io/vue-element-admin-site/zh/"
+    >国内文档</a>
+    <dropdown-menu :items="articleList" style="float:left;margin-left:50px;" title="系列文章" />
   </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return // 第二步 定义和显示内容关联数据
-      dialogFormVisible: false, // 定义对话框是否开关 true :开 ，false:关
-      tableData: [{
-        date: '2016-05-03',
-        name: '王小虎',
-        province: '上海',
-        city: '普陀区',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-02',
-        name: '王3虎',
-        province: '上海',
-        city: '普陀区',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王4虎',
-        province: '上海',
-        city: '普陀区',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王5虎',
-        province: '上海',
-        city: '普陀区',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }],
+import DropdownMenu from '@/components/Share/DropdownMenu'
 
-      form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: 'false',
-        type: [],
-        resource: '',
-        desc: ''
-      },
-      formLabelWidth: '120px'
-    }
-  },
-// 第三步 定义交互方法并和显示内容事件建立绑定
-  methods: {
-    // 打开对话框
-    dialogOpen(row) {
-      this.form.name = row.name // 把当前的row值给对话框对应的name
-      this.dialogFormVisible = true
-      console.log(row, this.form)
-    },
-    // 关闭对话框
-    dialogClose() {
-      console.log('dialogClose before', this.dialogFormVisible)
-      this.dialogFormVisible = false
-      console.log('dialogClose after', this.dialogFormVisible)
-    },
-    confirm() {
-      console.log('confirm')
-        this.dialogFormVisible = false
+export default {
+  name: 'Documentation',
+  components: { DropdownMenu },
+  data() {
+    return {
+      articleList: [
+        { title: '基础篇', href: 'https://juejin.im/post/59097cd7a22b9d0065fb61d2' },
+        { title: '登录权限篇', href: 'https://juejin.im/post/591aa14f570c35006961acac' },
+        { title: '实战篇', href: 'https://juejin.im/post/593121aa0ce4630057f70d35' },
+        { title: 'vue-admin-template 篇', href: 'https://juejin.im/post/595b4d776fb9a06bbe7dba56' },
+        { title: 'v4.0 篇', href: 'https://juejin.im/post/5c92ff94f265da6128275a85' },
+        { title: '自行封装 component', href: 'https://segmentfault.com/a/1190000009090836' },
+        { title: '优雅的使用 icon', href: 'https://juejin.im/post/59bb864b5188257e7a427c09' },
+        { title: 'webpack4（上）', href: 'https://juejin.im/post/59bb864b5188257e7a427c09' },
+        { title: 'webpack4（下）', href: 'https://juejin.im/post/5b5d6d6f6fb9a04fea58aabc' }
+      ]
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .documentation-container {
+    margin: 50px;
+    .document-btn {
+      float: left;
+      margin-left: 50px;
+      display: block;
+      cursor: pointer;
+      background: black;
+      color: white;
+      height: 60px;
+      width: 180px;
+      line-height: 60px;
+      font-size: 20px;
+      text-align: center;
+    }
+  }
+</style>

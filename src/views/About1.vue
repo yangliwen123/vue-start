@@ -27,6 +27,16 @@
         width="120"
       />
       <el-table-column
+        prop="address"
+        label="地址"
+        width="300"
+      />
+      <el-table-column
+        prop="zip"
+        label="邮编"
+        width="120"
+      />
+      <el-table-column
         fixed="right"
         label="操作"
         width="100"
@@ -50,7 +60,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogClose()">取 消</el-button>
-        <el-button type="primary" @click="confirm()">确 定</el-button>
+        <el-button type="primary" @click="dialogClose()">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -104,22 +114,15 @@ export default {
   },
 
   methods: {
-    // 打开对话框
-    dialogOpen(row) {
+    get(row) {
       this.form.name = row.name
-      // 把当前的row值给对话框对应的name
       this.dialogFormVisible = true
       console.log(row, this.form)
     },
-    // 关闭对话框
     dialogClose() {
       console.log('dialogClose before', this.dialogFormVisible)
       this.dialogFormVisible = false
       console.log('dialogClose after', this.dialogFormVisible)
-    },
-    confirm() {
-      console.log('confirm')
-      this.dialogFormVisible = false
     }
   }
 }
